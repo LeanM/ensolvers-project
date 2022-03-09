@@ -18,6 +18,8 @@ public class Folder extends Item {
         this.itemCollection = new ArrayList<Item>();
     }
 
+    public Folder() {}
+
     public List<Item> getItemCollection() {
         return itemCollection;
     }
