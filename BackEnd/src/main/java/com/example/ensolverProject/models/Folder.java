@@ -1,11 +1,13 @@
 package com.example.ensolverProject.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@DiscriminatorValue("1")
+@Table (name = "folders")
 public class Folder extends Item {
 
     @OneToMany (fetch = FetchType.LAZY,
@@ -20,6 +22,7 @@ public class Folder extends Item {
 
     public Folder() {}
 
+    @JsonIgnore
     public List<Item> getItemCollection() {
         return itemCollection;
     }

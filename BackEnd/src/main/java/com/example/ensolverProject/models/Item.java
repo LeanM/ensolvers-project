@@ -1,14 +1,14 @@
 package com.example.ensolverProject.models;
 
 import com.example.ensolverProject.models.Folder;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 
-@Entity(name="items")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="item_type",
-        discriminatorType = DiscriminatorType.INTEGER)
+@Entity
+@Table (name = "items")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Item {
 
     @SequenceGenerator(
@@ -53,8 +53,14 @@ public abstract class Item {
         this.name = name;
     }
 
+    @JsonIgnore
     public Folder getParentFolder() {
         return parentFolder;
+    }
+
+    @JsonInclude
+    public Long getIdParentFolder() {
+        return parentFolder.getId();
     }
 
     public void setParentFolder(Folder parentFolder) {

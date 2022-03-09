@@ -5,24 +5,24 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@DiscriminatorValue("2")
+@Table (name = "todos")
 public class Todo extends Item {
 
-    protected Boolean isChecked;
+    protected Boolean checked;
 
     public Todo(String name) {
         super(name);
-        this.isChecked = false;
+        this.checked = false;
     }
 
     public Todo() {}
 
     public Boolean getChecked() {
-        return isChecked;
+        return checked;
     }
 
     public void setChecked(Boolean checked) {
-        isChecked = checked;
+        this.checked = checked;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class Todo extends Item {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", parentFolder=" + parentFolder +
-                ", isChecked=" + isChecked +
+                ", isChecked=" + checked +
                 '}';
     }
 }
