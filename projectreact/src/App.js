@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Todo from "./components/todo";
+import Folder from "./components/folder";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="body">
+      <h1 className="body__h1">To-do List</h1>
+      <div className="body__directory">
+        <p className="body__directory__text">MainFolder</p>
+      </div>
+      <div className="body__list-items">
+        <Todo name="dormir" />
+        <Folder name="Mañana" />
+      </div>
+      <form></form>
     </div>
   );
 }
