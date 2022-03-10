@@ -73,13 +73,13 @@ export const addNewFolder = (folderName, idParentFolder) => {
   }).then(checkStatus);
 };
 
-export const updateTodo = (idTodo, todoName, checked) => {
+export const updateTodo = (idTodo, todoName, isChecked) => {
   return fetch(server_path + "todo/update/" + idTodo, {
     headers: {
       "Content-Type": "application/json",
     },
     method: "PUT",
-    body: JSON.stringify({ name: todoName, checked: checked }),
+    body: JSON.stringify({ name: todoName, checked: isChecked }),
   }).then(checkStatus);
 };
 

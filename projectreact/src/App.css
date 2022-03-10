@@ -17,13 +17,19 @@
 .body__h1 {
   width: 100vw;
   font-family: "Secular One", sans-serif;
+  font-size: 7vh;
   text-align: center;
 }
 
 .body__directory {
-  font-family: "Secular One", sans-serif;
-  font-weight: 500;
   margin: 0 auto;
+}
+
+.body__directory-text {
+  font-family: "Secular One", sans-serif;
+  color: var(--grey-white);
+  text-shadow: 0.5px 0.5px 2px var(--black);
+  font-weight: 500;
 }
 
 .body__list-items {
@@ -38,18 +44,101 @@
   margin: 0 auto;
 }
 
-.body__list-items__item {
+.body__list-items__item-todo {
   display: flex;
+  align-items: center;
+  height: 6vh;
   margin-left: 1vw;
-  margin-top: 1.5vh;
+  margin-top: 1vh;
 }
 
-.body__list-items__item-checkbox {
+.body__list-items__item-folder {
+  display: flex;
+  align-items: center;
+  height: 6vh;
+  margin-left: 2.5vw;
+  margin-top: 1vh;
+}
+
+.body__list-items__item-todo__checkbox {
   order: -1;
   margin-right: 0.5vw;
 }
 
-.body__list-items__item-text {
+.body__list-items__item-todo__text,
+.body__list-items__item-folder__text {
   font-family: "Mukta", sans-serif;
   font-weight: 800;
+  text-align: center;
+  width: 6vw;
+}
+
+.body__list-items__item-folder__folderlink {
+  width: 6vw;
+  text-align: center;
+}
+
+.body__list-items__item-folder__folderlink:hover {
+  color: var(--orange);
+  cursor: pointer;
+}
+
+.body__list-items__item-todo__editbutton,
+.body__list-items__item-folder__editbutton,
+.body__list-items__item-todo__deletebutton,
+.body__list-items__item-folder__deletebutton {
+  color: var(--light-blue);
+  font-size: 2vh;
+  margin-left: 0.5vw;
+}
+
+.body__list-items__item-todo__editbutton:hover,
+.body__list-items__item-folder__editbutton:hover,
+.body__list-items__item-todo__deletebutton:hover,
+.body__list-items__item-folder__deletebutton:hover {
+  cursor: pointer;
+}
+
+.body__add-items {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 40vh;
+}
+
+.body__add-items__text {
+  width: 60vw;
+  height: 3vh;
+  background-color: var(--grey-white);
+  border-radius: 5px;
+  border-style: hidden;
+  box-shadow: 1px 1px 4px var(--black);
+  margin-top: 2vh;
+}
+
+.body__add-items__add-todo,
+.body__add-items__add-folder {
+  width: 40%;
+  height: 5vh;
+  font-family: "Mukta", sans-serif;
+  font-weight: 800;
+  margin-top: 1vh;
+  border-radius: 5px;
+  border-style: hidden;
+  background-color: var(--grey-white);
+  transition: all 1s;
+}
+
+.body__add-items__add-todo {
+  margin-right: 1vh;
+}
+
+.body__add-items__add-folder {
+  margin-left: 1vh;
+}
+
+.body__add-items__add-todo:hover,
+.body__add-items__add-folder:hover {
+  background-color: var(--orange);
 }
