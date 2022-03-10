@@ -9,6 +9,7 @@
 .body {
   width: 100vw;
   height: 100vh;
+  background-color: var(--clear-white);
   display: flex;
   flex-direction: column;
 }
@@ -32,4 +33,20 @@
   box-shadow: 2px 2px 4px var(--black);
   background-color: var(--grey-white);
   margin: 0 auto;
+}
+
+.body__list-items__item {
+  display: flex;
+  margin-left: 1vw;
+  margin-top: 1.5vh;
+}
+
+.body__list-items__item-checkbox {
+  order: -1;
+  margin-right: 0.5vw;
+}
+
+.body__list-items__item-text {
+  font-family: "Mukta", sans-serif;
+  font-weight: 800;
 }
