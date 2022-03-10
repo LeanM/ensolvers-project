@@ -18,7 +18,7 @@ public class Todo extends Item {
     public Todo() {}
 
     public Boolean getChecked() {
-        return checked;
+        return this.checked;
     }
 
     public void setChecked(Boolean checked) {

@@ -6,6 +6,7 @@ import com.example.ensolverProject.models.Todo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,6 +105,7 @@ public class ItemService {
      * @param idParentFolder
      * @param folder
      */
+    @Transactional
     public void addFolder(Long idParentFolder, Folder folder) {
         verifyIdAccess(idParentFolder);
         if(folderRepository.existsById(idParentFolder)){
@@ -126,6 +128,7 @@ public class ItemService {
      * @param idParentFolder
      * @param todo
      */
+    @Transactional
     public void addTodo(Long idParentFolder, Todo todo) {
         verifyIdAccess(idParentFolder);
         if(folderRepository.existsById(idParentFolder)){
@@ -180,6 +183,7 @@ public class ItemService {
      * @param idFolder
      * @param folder
      */
+    @Transactional
     public void updateFolder(Long idFolder, Folder folder) {
         verifyIdAccess(idFolder);
         if(folderRepository.existsById(idFolder)){
@@ -201,6 +205,7 @@ public class ItemService {
      * @param idTodo
      * @param todo
      */
+    @Transactional
     public void updateTodo(Long idTodo, Todo todo) {
         verifyIdAccess(idTodo);
         if(todoRepository.existsById(idTodo)){
@@ -208,6 +213,7 @@ public class ItemService {
                 Todo oldTodo = todoRepository.getById(idTodo);
                 oldTodo.setName(todo.getName());
                 oldTodo.setChecked(todo.getChecked());
+                System.out.println(oldTodo.getChecked());
             }
             else throw new IllegalStateException("Invalid todo's new name");
         }

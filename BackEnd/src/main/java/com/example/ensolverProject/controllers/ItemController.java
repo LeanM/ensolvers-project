@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin ("*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping ( path = "api/todolist" )
 public class ItemController {
@@ -38,23 +38,59 @@ public class ItemController {
     }
 
     @GetMapping (path = "folder")
-    public List<Folder> getFoldersInMain() {
-        return itemService.getFoldersInMain();
+    public ResponseEntity<List<Folder>> getFoldersInMain() {
+        ResponseEntity<List<Folder>> response;
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json");
+
+        List<Folder> toReturn = itemService.getFoldersInMain();
+
+        response = new ResponseEntity<List<Folder>>(toReturn,headers,HttpStatus.OK);
+
+        return response;
     }
 
     @GetMapping (path = "todo")
-    public List<Todo> getTodosInMain() {
-        return itemService.getTodosInMain();
+    public ResponseEntity<List<Todo>> getTodosInMain() {
+        ResponseEntity<List<Todo>> response;
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json");
+
+        List<Todo> toReturn = itemService.getTodosInMain();
+
+        response = new ResponseEntity<List<Todo>>(toReturn,headers,HttpStatus.OK);
+
+        return response;
     }
 
     @GetMapping (path = "folder/{idParentFolder}")
-    public List<Folder> getFoldersInFolder(@PathVariable Long idParentFolder) {
-        return itemService.getFoldersInFolder(idParentFolder);
+    public ResponseEntity<List<Folder>> getFoldersInFolder(@PathVariable Long idParentFolder) {
+        ResponseEntity<List<Folder>> response;
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json");
+
+        List<Folder> toReturn = itemService.getFoldersInFolder(idParentFolder);
+
+        response = new ResponseEntity<List<Folder>>(toReturn,headers,HttpStatus.OK);
+
+        return response;
     }
 
     @GetMapping (path = "todo/{idParentFolder}")
-    public List<Todo> getTodosInFolder(@PathVariable Long idParentFolder) {
-        return itemService.getTodosInFolder(idParentFolder);
+    public ResponseEntity<List<Todo>> getTodosInFolder(@PathVariable Long idParentFolder) {
+        ResponseEntity<List<Todo>> response;
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json");
+
+        List<Todo> toReturn = itemService.getTodosInFolder(idParentFolder);
+
+        response = new ResponseEntity<List<Todo>>(toReturn,headers,HttpStatus.OK);
+
+        return response;
     }
 
     @PostMapping (path = "folder")
@@ -69,24 +105,24 @@ public class ItemController {
         itemService.addTodo(idParentFolder,todo);
     }
 
-    @DeleteMapping (path = "folder/delete")
-    public void deleteFolder(@RequestParam (required = true) Long idFolder) {
+    @DeleteMapping (path = "folder/delete/{idFolder}")
+    public void deleteFolder(@PathVariable Long idFolder) {
         itemService.deleteFolder(idFolder);
     }
 
-    @DeleteMapping (path = "todo/delete")
-    public void deleteTodo(@RequestParam (required = true) Long idTodo) {
+    @DeleteMapping (path = "todo/delete/{idTodo}")
+    public void deleteTodo(@PathVariable Long idTodo) {
         itemService.deleteTodo(idTodo);
     }
 
-    @PutMapping (path = "folder/update")
-    public void updateFolder(@RequestParam (required = true) Long idFolder,
+    @PutMapping (path = "folder/update/{idFolder}")
+    public void updateFolder(@PathVariable Long idFolder,
                              @RequestBody Folder folder) {
         itemService.updateFolder(idFolder,folder);
     }
 
-    @PutMapping (path = "todo/update")
-    public void updateTodo(@RequestParam (required = true) Long idTodo,
+    @PutMapping (path = "todo/update/{idTodo}")
+    public void updateTodo(@PathVariable Long idTodo,
                              @RequestBody Todo todo) {
         itemService.updateTodo(idTodo,todo);
     }
