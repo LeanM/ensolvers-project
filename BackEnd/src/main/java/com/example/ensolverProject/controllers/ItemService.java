@@ -29,7 +29,7 @@ public class ItemService {
      * @param idParentFolder
      */
     private void verifyIdAccess(Long idParentFolder) {
-        if(idParentFolder <= 0)
+        if(idParentFolder < 0)
             throw new IllegalStateException("Invalid folder");
     }
 
