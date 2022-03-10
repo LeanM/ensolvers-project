@@ -5,7 +5,7 @@ export default function PageWrapper(props) {
       <div className="body__directory">
         <p className="body__directory__text">MainFolder</p>
       </div>
-      <div className="body__list-items">{props.children}</div>
+      {props.children}
       <form></form>
     </div>
   );
