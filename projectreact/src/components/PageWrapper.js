@@ -5,7 +5,17 @@ export default function PageWrapper(props) {
     <div className="body">
       <h1 className="body__h1">To-do List</h1>
       <div className="body__directory">
-        <span className="body__directory-text">MainFolder</span>
+        <button
+          className="body__directory-backbutton"
+          onClick={() => {
+            props.onBack();
+          }}
+        >
+          &lt;
+        </button>
+        <span className="body__directory-text">
+          {props.folderDirectorio.map((a) => a[1] + "/")}
+        </span>
       </div>
       {props.children}
       <div className="body__add-items">

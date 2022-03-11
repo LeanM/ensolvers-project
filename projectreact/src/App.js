@@ -11,8 +11,7 @@ import ListItems from "./components/listItems";
 
 function App() {
   const [idFolderActual, setIdFolderActual] = useState(0);
-  const [folderDirectorio, setFolderDirectorio] = useState([[1, "MainFolder"]]);
-  const [idParentFolderActual, setIdParentFolderActual] = useState(0);
+  const [folderDirectorio, setFolderDirectorio] = useState([[0, "MainFolder"]]);
 
   const [listTodos, setListTodos] = useState([]);
   const [listFolders, setListFolders] = useState([]);
@@ -54,9 +53,21 @@ function App() {
     fetchTodos();
   }, [idFolderActual]);
 
+  const backFolder = () => {
+    if (folderDirectorio.length > 1) {
+      folderDirectorio.pop();
+      let lastFolder = folderDirectorio[folderDirectorio.length - 1];
+      setIdFolderActual(lastFolder[0]);
+    }
+  };
+
   return (
     <PageWrapper
       idFolderActual={idFolderActual}
+      folderDirectorio={folderDirectorio}
+      onBack={() => {
+        backFolder();
+      }}
       onCreate={() => {
         fetchFolders();
         fetchTodos();
@@ -65,6 +76,7 @@ function App() {
       <ListItems
         onEnterFolder={(idFolderToEnter, nameFolder) => {
           setIdFolderActual(idFolderToEnter);
+          folderDirectorio.push([idFolderToEnter, nameFolder]);
         }}
         onDeleteItem={() => {
           fetchFolders();

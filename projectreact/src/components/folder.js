@@ -20,12 +20,14 @@ export default function Folder(props) {
           }}
         ></Modal>
       )}
+
       <a
         className="body__list-items__item-folder__folderlink"
         onClick={() => {
           props.onEnterFolder(props.id, props.name);
         }}
       >
+        <i className="body__list-items__item-folder__foldericon fa-solid fa-folder"></i>
         <span className="body__list-items__item-folder__text">{name}</span>
       </a>
       <a
