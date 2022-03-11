@@ -1,5 +1,7 @@
 package com.example.ensolverProject.controllers;
 
+import com.example.ensolverProject.exceptions.InvalidItemException;
+import com.example.ensolverProject.exceptions.InvalidNameException;
 import com.example.ensolverProject.models.Folder;
 import com.example.ensolverProject.models.Item;
 import com.example.ensolverProject.models.Todo;
@@ -29,9 +31,9 @@ public class ItemService {
      * if its invalid throws an exception
      * @param idParentFolder
      */
-    private void verifyIdAccess(Long idParentFolder) {
+    private void verifyIdAccess(Long idParentFolder) throws InvalidItemException {
         if(idParentFolder < 0)
-            throw new IllegalStateException("Invalid folder");
+            throw new InvalidItemException("Invalid folder");
     }
 
     /**
@@ -77,11 +79,11 @@ public class ItemService {
      * @param idParentFolder
      * @return List<Folder>
      */
-    public List<Folder> getFoldersInFolder(Long idParentFolder) {
+    public List<Folder> getFoldersInFolder(Long idParentFolder) throws InvalidItemException {
         verifyIdAccess(idParentFolder);
         if(folderRepository.existsById(idParentFolder))
             return folderRepository.findAllByIdParentFolder(idParentFolder, Sort.by(Sort.Direction.ASC,"id"));
-        else throw new IllegalStateException("The folder doesnt exists");
+        else throw new InvalidItemException("The folder doesnt exists");
     }
 
     /**
@@ -90,11 +92,11 @@ public class ItemService {
      * @param idParentFolder
      * @return List<Todo>
      */
-    public List<Todo> getTodosInFolder(Long idParentFolder) {
+    public List<Todo> getTodosInFolder(Long idParentFolder) throws InvalidItemException {
         verifyIdAccess(idParentFolder);
         if(folderRepository.existsById(idParentFolder))
             return todoRepository.findAllByIdParentFolder(idParentFolder, Sort.by(Sort.Direction.ASC,"id"));
-        else throw new IllegalStateException("The folder doesnt exists");
+        else throw new InvalidItemException("The folder doesnt exists");
     }
 
     /**
@@ -106,7 +108,7 @@ public class ItemService {
      * @param folder
      */
     @Transactional
-    public void addFolder(Long idParentFolder, Folder folder) {
+    public void addFolder(Long idParentFolder, Folder folder) throws InvalidItemException, InvalidNameException {
         verifyIdAccess(idParentFolder);
         if(folderRepository.existsById(idParentFolder)){
             if(folder.getName().length() > 2) {
@@ -115,9 +117,9 @@ public class ItemService {
                 folder.setParentFolder(parentFolder);
                 this.folderRepository.save(folder);
             }
-            else throw new IllegalStateException("The name of the new folder is invalid");
+            else throw new InvalidNameException("The name of the new folder is invalid");
         }
-        else throw new IllegalStateException("The parent folder doesnt exists");
+        else throw new InvalidItemException("The parent folder doesnt exists");
     }
 
     /**
@@ -129,7 +131,7 @@ public class ItemService {
      * @param todo
      */
     @Transactional
-    public void addTodo(Long idParentFolder, Todo todo) {
+    public void addTodo(Long idParentFolder, Todo todo) throws InvalidItemException, InvalidNameException {
         verifyIdAccess(idParentFolder);
         if(folderRepository.existsById(idParentFolder)){
             if(todo.getName().length() > 2) {
@@ -138,9 +140,9 @@ public class ItemService {
                 todo.setParentFolder(parentFolder);
                 this.todoRepository.save(todo);
             }
-            else throw new IllegalStateException("The name of the new todo is invalid");
+            else throw new InvalidNameException("The name of the new todo is invalid");
         }
-        else throw new IllegalStateException("The parent folder doesnt exists");
+        else throw new InvalidItemException("The parent folder doesnt exists");
     }
 
     /**
@@ -148,7 +150,7 @@ public class ItemService {
      * If the folder doesnt exists, an exception will be thrown
      * @param idFolder
      */
-    public void deleteFolder(Long idFolder) {
+    public void deleteFolder(Long idFolder) throws InvalidItemException {
         verifyIdAccess(idFolder);
         if(folderRepository.existsById(idFolder)){
             for(Folder f : folderRepository.findAllByIdParentFolder(idFolder,Sort.by(Sort.Direction.ASC,"id")))
@@ -158,7 +160,7 @@ public class ItemService {
 
             folderRepository.deleteById(idFolder);
         }
-        else throw new IllegalStateException("La carpeta no existe.");
+        else throw new InvalidItemException("La carpeta no existe.");
     }
 
     /**
@@ -166,12 +168,12 @@ public class ItemService {
      * If the todo doesnt exists, an exception will be thrown
      * @param idTodo
      */
-    public void deleteTodo(Long idTodo) {
+    public void deleteTodo(Long idTodo) throws InvalidItemException {
         verifyIdAccess(idTodo);
         if(todoRepository.existsById(idTodo))
             todoRepository.deleteById(idTodo);
         else
-            throw new IllegalStateException("Invalid todo id");
+            throw new InvalidItemException("Invalid todo id");
     }
 
     /**
@@ -184,16 +186,16 @@ public class ItemService {
      * @param folder
      */
     @Transactional
-    public void updateFolder(Long idFolder, Folder folder) {
+    public void updateFolder(Long idFolder, Folder folder) throws InvalidItemException, InvalidNameException {
         verifyIdAccess(idFolder);
         if(folderRepository.existsById(idFolder)){
             if(folder.getName().length() > 2) {
                 Folder oldFolder = folderRepository.getById(idFolder);
                 oldFolder.setName(folder.getName());
             }
-            else throw new IllegalStateException("Invalid folder's new name");
+            else throw new InvalidNameException("Invalid folder's new name");
         }
-        else throw new IllegalStateException("Invalid folder id");
+        else throw new InvalidItemException("Invalid folder id");
     }
 
     /**
@@ -206,7 +208,7 @@ public class ItemService {
      * @param todo
      */
     @Transactional
-    public void updateTodo(Long idTodo, Todo todo) {
+    public void updateTodo(Long idTodo, Todo todo) throws InvalidItemException, InvalidNameException {
         verifyIdAccess(idTodo);
         if(todoRepository.existsById(idTodo)){
             if(todo.getName().length() > 2) {
@@ -214,8 +216,8 @@ public class ItemService {
                 oldTodo.setName(todo.getName());
                 oldTodo.setChecked(todo.getChecked());
             }
-            else throw new IllegalStateException("Invalid todo's new name");
+            else throw new InvalidNameException("Invalid todo's new name");
         }
-        else throw new IllegalStateException("Invalid todo id");
+        else throw new InvalidItemException("Invalid todo id");
     }
 }

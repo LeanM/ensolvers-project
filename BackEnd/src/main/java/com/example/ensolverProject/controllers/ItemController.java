@@ -1,5 +1,7 @@
 package com.example.ensolverProject.controllers;
 
+import com.example.ensolverProject.exceptions.InvalidItemException;
+import com.example.ensolverProject.exceptions.InvalidNameException;
 import com.example.ensolverProject.models.Folder;
 import com.example.ensolverProject.models.Item;
 import com.example.ensolverProject.models.Todo;
@@ -66,7 +68,7 @@ public class ItemController {
     }
 
     @GetMapping (path = "folder/{idParentFolder}")
-    public ResponseEntity<List<Folder>> getFoldersInFolder(@PathVariable Long idParentFolder) {
+    public ResponseEntity<List<Folder>> getFoldersInFolder(@PathVariable Long idParentFolder) throws InvalidItemException {
         ResponseEntity<List<Folder>> response;
 
         HttpHeaders headers = new HttpHeaders();
@@ -80,7 +82,7 @@ public class ItemController {
     }
 
     @GetMapping (path = "todo/{idParentFolder}")
-    public ResponseEntity<List<Todo>> getTodosInFolder(@PathVariable Long idParentFolder) {
+    public ResponseEntity<List<Todo>> getTodosInFolder(@PathVariable Long idParentFolder) throws InvalidItemException {
         ResponseEntity<List<Todo>> response;
 
         HttpHeaders headers = new HttpHeaders();
@@ -95,35 +97,35 @@ public class ItemController {
 
     @PostMapping (path = "folder")
     public void addFolder(@RequestParam (required = true) Long idParentFolder,
-                          @RequestBody Folder folder) {
+                          @RequestBody Folder folder) throws InvalidNameException, InvalidItemException {
         itemService.addFolder(idParentFolder,folder);
     }
 
     @PostMapping (path = "todo")
     public void addTodo(@RequestParam (required = true) Long idParentFolder,
-                        @RequestBody Todo todo) {
+                        @RequestBody Todo todo) throws InvalidNameException, InvalidItemException {
         itemService.addTodo(idParentFolder,todo);
     }
 
     @DeleteMapping (path = "folder/delete/{idFolder}")
-    public void deleteFolder(@PathVariable Long idFolder) {
+    public void deleteFolder(@PathVariable Long idFolder) throws InvalidItemException {
         itemService.deleteFolder(idFolder);
     }
 
     @DeleteMapping (path = "todo/delete/{idTodo}")
-    public void deleteTodo(@PathVariable Long idTodo) {
+    public void deleteTodo(@PathVariable Long idTodo) throws InvalidItemException {
         itemService.deleteTodo(idTodo);
     }
 
     @PutMapping (path = "folder/update/{idFolder}")
     public void updateFolder(@PathVariable Long idFolder,
-                             @RequestBody Folder folder) {
+                             @RequestBody Folder folder) throws InvalidNameException, InvalidItemException {
         itemService.updateFolder(idFolder,folder);
     }
 
     @PutMapping (path = "todo/update/{idTodo}")
     public void updateTodo(@PathVariable Long idTodo,
-                             @RequestBody Todo todo) {
+                             @RequestBody Todo todo) throws InvalidNameException, InvalidItemException {
         itemService.updateTodo(idTodo,todo);
     }
 
