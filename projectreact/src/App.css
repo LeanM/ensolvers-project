@@ -3,6 +3,7 @@
   --light-blue: rgb(43, 83, 156);
   --clear-white: rgb(231, 216, 204);
   --grey-white: rgb(153, 143, 135);
+  --light-grey-white: rgb(160, 158, 156);
   --orange: rgb(219, 184, 130);
 }
 
@@ -18,6 +19,7 @@
   width: 100vw;
   font-family: "Secular One", sans-serif;
   font-size: 7vh;
+  font-weight: 2000;
   text-align: center;
 }
 
@@ -122,6 +124,7 @@
   width: 40%;
   height: 5vh;
   font-family: "Mukta", sans-serif;
+  color: var(--black);
   font-weight: 800;
   margin-top: 1vh;
   border-radius: 5px;
@@ -140,5 +143,58 @@
 
 .body__add-items__add-todo:hover,
 .body__add-items__add-folder:hover {
+  background-color: var(--orange);
+}
+
+.body__list-items__modal {
+  display: flex;
+  align-content: center;
+  position: fixed;
+  width: 30vh;
+  height: 20vh;
+  background-color: var(--clear-white);
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px var(--black);
+  flex-direction: column;
+}
+
+.body__list-items__modal-title {
+  align-self: center;
+  font-family: "Mukta", sans-serif;
+  font-weight: 800;
+}
+
+.body__list-items__modal-exit {
+  align-self: flex-end;
+  background-color: var(--grey-white);
+  margin-top: 1vh;
+  margin-right: 1vh;
+  border-style: hidden;
+  border-radius: 20px;
+}
+
+#editNameText {
+  width: 80%;
+  height: 2vh;
+  border-radius: 5px;
+  border-style: hidden;
+  box-shadow: 1px 1px 3px var(--black);
+  background-color: var(--grey-white);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2vh;
+}
+
+.body__list-items__modal-complete {
+  width: 30%;
+  align-self: center;
+  margin-top: 2vh;
+  border-style: hidden;
+  border-radius: 5px;
+  background-color: var(--grey-white);
+}
+
+.body__list-items__modal-complete:hover,
+.body__list-items__modal-exit:hover {
   background-color: var(--orange);
 }

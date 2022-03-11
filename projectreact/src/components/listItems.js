@@ -14,6 +14,7 @@ export default function ListItems(props) {
           props.onEnterFolder(idFolderToEnter, nameFolder)
         }
         onDeleteItem={() => props.onDeleteItem()}
+        onEditItem={() => props.onEditItem()}
       ></Folder>
     );
   });
@@ -25,6 +26,7 @@ export default function ListItems(props) {
         name={todo.name}
         checked={todo.checked}
         onDeleteItem={() => props.onDeleteItem()}
+        onEditItem={() => props.onEditItem()}
       ></Todo>
     );
   });

@@ -1,12 +1,26 @@
 import { useState } from "react";
 import { deleteTodo, updateTodo } from "../client";
+import Modal from "./modal";
 
 export default function Todo(props) {
   const [name, setName] = useState(props.name);
   const [check, setCheck] = useState(props.checked);
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <div className="body__list-items__item-todo">
+      {openModal && (
+        <Modal
+          onClose={() => {
+            setOpenModal(false);
+          }}
+          onEdit={(newName) => {
+            setOpenModal(false);
+            setName(newName);
+            updateTodo(props.id, newName);
+          }}
+        ></Modal>
+      )}
       <span className="body__list-items__item-todo__text">{name}</span>
       <input
         className="body__list-items__item-todo__checkbox"
@@ -17,7 +31,12 @@ export default function Todo(props) {
         }}
         checked={check}
       ></input>
-      <a className="body__list-items__item-todo__editbutton" onClick={() => {}}>
+      <a
+        className="body__list-items__item-todo__editbutton"
+        onClick={() => {
+          setOpenModal(true);
+        }}
+      >
         <p>Edit</p>
       </a>
       <a
