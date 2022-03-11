@@ -9,6 +9,7 @@
 
 .body {
   width: 100vw;
+  min-width: 200px;
   height: 100vh;
   background-color: var(--clear-white);
   display: flex;
@@ -37,8 +38,9 @@
 .body__list-items {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap; /* sacar en responsive */
+  flex-wrap: wrap;
   width: 80vw;
+  min-width: 200px;
   height: 60vh;
   border-radius: 5px;
   box-shadow: 2px 2px 4px var(--black);
@@ -48,31 +50,40 @@
 
 .body__list-items__item-todo {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  height: 6vh;
+  height: 5vh;
+  min-width: 15vw;
   margin-left: 1vw;
-  margin-top: 1vh;
+  margin-top: 0.5vh;
 }
 
 .body__list-items__item-folder {
   display: flex;
   align-items: center;
-  height: 6vh;
+  height: 5vh;
+  width: 20vw;
+  min-width: 15vw;
   margin-left: 2.5vw;
-  margin-top: 1vh;
+  margin-top: 0.5vh;
 }
 
 .body__list-items__item-todo__checkbox {
   order: -1;
   margin-right: 0.5vw;
+  width: 1.5vh;
+  height: 1.5vh;
 }
 
 .body__list-items__item-todo__text,
 .body__list-items__item-folder__text {
   font-family: "Mukta", sans-serif;
   font-weight: 800;
+  font-size: 2.5vh;
   text-align: center;
-  width: 6vw;
+  width: 20vh;
+  height: 3vh;
+  margin-right: 2vh;
 }
 
 .body__list-items__item-folder__folderlink {
@@ -91,7 +102,8 @@
 .body__list-items__item-folder__deletebutton {
   color: var(--light-blue);
   font-size: 2vh;
-  margin-left: 0.5vw;
+  height: 3vh;
+  margin-left: 1.5vh;
 }
 
 .body__list-items__item-todo__editbutton:hover,
@@ -107,6 +119,7 @@
   justify-content: center;
   flex-wrap: wrap;
   width: 40vh;
+  min-width: 40vh;
 }
 
 .body__add-items__text {
@@ -197,4 +210,20 @@
 .body__list-items__modal-complete:hover,
 .body__list-items__modal-exit:hover {
   background-color: var(--orange);
+}
+
+@media screen and (max-width: 450px) {
+  .body__list-items {
+    flex-wrap: nowrap;
+  }
+
+  .body__list-items__item-todo__text,
+  .body__list-items__item-folder__text {
+    font-size: 2vh;
+  }
+
+  .body__list-items__item-todo,
+  .body__list-items__item-folder {
+    height: 3vh;
+  }
 }

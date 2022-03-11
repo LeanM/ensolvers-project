@@ -213,7 +213,6 @@ public class ItemService {
                 Todo oldTodo = todoRepository.getById(idTodo);
                 oldTodo.setName(todo.getName());
                 oldTodo.setChecked(todo.getChecked());
-                System.out.println(oldTodo.getChecked());
             }
             else throw new IllegalStateException("Invalid todo's new name");
         }

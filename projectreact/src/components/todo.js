@@ -17,7 +17,7 @@ export default function Todo(props) {
           onEdit={(newName) => {
             setOpenModal(false);
             setName(newName);
-            updateTodo(props.id, newName);
+            updateTodo(props.id, newName, check);
           }}
         ></Modal>
       )}
@@ -37,7 +37,7 @@ export default function Todo(props) {
           setOpenModal(true);
         }}
       >
-        <p>Edit</p>
+        <span>Edit</span>
       </a>
       <a
         onClick={() => {
@@ -47,7 +47,7 @@ export default function Todo(props) {
         }}
         className="body__list-items__item-todo__deletebutton"
       >
-        <p>Delete</p>
+        <span>Delete</span>
       </a>
     </div>
   );
